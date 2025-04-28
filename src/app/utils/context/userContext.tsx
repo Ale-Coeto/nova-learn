@@ -1,7 +1,7 @@
 "use client"
 import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useState } from "react";
 import { User } from "../types/user";
-import { defaultUser } from "../mockdb/users";
+import { defaultUser } from "../../backend/db/users";
 
 type UserContextType = {
     user: User | null;
@@ -10,16 +10,16 @@ type UserContextType = {
 
 // export const UserContext = createContext<UserContextType | undefined>(undefined);
 export const UserContext = createContext<UserContextType>({
-    user: defaultUser, 
-    setUser: () => {}, 
+    user: defaultUser,
+    setUser: () => { },
 });
 
-export function UserProvider({children}:{children: ReactNode}) {
+export function UserProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
 
     return (
-        <UserContext.Provider value={{user, setUser}}>
-        {children}
+        <UserContext.Provider value={{ user, setUser }}>
+            {children}
         </UserContext.Provider>
     );
 }

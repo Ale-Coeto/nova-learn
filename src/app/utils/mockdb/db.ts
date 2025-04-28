@@ -1,4 +1,4 @@
-import { registeredUsers } from "./users";
+import { registeredUsers } from "../../backend/db/users";
 
 export const getUser = (username: string) => {
     return registeredUsers.find(user => user.username === username);

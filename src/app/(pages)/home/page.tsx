@@ -1,6 +1,6 @@
 "use client";
 import { useContext } from "react";
-import { UserContext } from "../utils/context/userContext";
+import { UserContext } from "../../utils/context/userContext";
 import Link from "next/link";
 
 const HomePage = () => {

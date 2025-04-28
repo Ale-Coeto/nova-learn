@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { passwordSchema } from "../utils/schemas/passwordSchema";
 import { validateUser } from "../utils/mockdb/db";
 import { UserContext } from "../utils/context/userContext";
+import axios from "axios";
 
 const AuthCard = () => {
     // Se podría crear un user type, pero al ser solo dos valores, se harán por separado
@@ -30,16 +31,23 @@ const AuthCard = () => {
     }
 
     const handleSubmit = () => {
-        const result = validateUser(username, password);
-        if (result.success) {
-            setUser(result.user);
-            console.log(user);
-            router.push("/home");
-            resetValues();
-        }
-        else {
-            setError(result.message);
-        }
+        axios.post("/api/user", {
+            username,
+            password
+        })
+            .then((res) => {
+                if (res.data.success) {
+                    setUser(res.data.user);
+                    router.push("/home");
+                    resetValues();
+                } else {
+                    setError(res.data.message);
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+                setError("Usuario o contraseña incorrectos");
+            });
     }
 
 
