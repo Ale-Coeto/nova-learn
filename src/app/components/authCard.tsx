@@ -34,7 +34,7 @@ const AuthCard = () => {
         if (result.success) {
             setUser(result.user);
             console.log(user);
-            // router.push("/home");
+            router.push("/home");
             resetValues();
         }
         else {
